@@ -1,7 +1,6 @@
 import MODEL.Progress;
 import DAO.ProgressDAO;
 
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -71,17 +70,35 @@ public class Main {
             System.out.print("Enter Module ID: ");
             int moduleId = Integer.parseInt(scanner.nextLine());
 
-            System.out.print("Enter Progress Status: ");
-            String progressStatus = scanner.nextLine();
+            System.out.print("Enter Progress Status (starter, beginner, excellent): ");
+            String progressStatus = scanner.nextLine().toLowerCase();
+
+            // Validate progress status
+            if (!progressStatus.equals("starter") && !progressStatus.equals("beginner") && !progressStatus.equals("excellent")) {
+                System.out.println("Invalid Progress Status. Please choose between starter, beginner, or excellent.");
+                return;
+            }
 
             System.out.print("Enter Completion Date (YYYY-MM-DD): ");
             String completionDate = scanner.nextLine();
 
-            System.out.print("Enter Score: ");
+            System.out.print("Enter Score (0-100): ");
             int score = Integer.parseInt(scanner.nextLine());
 
-            System.out.print("Enter Attempts: ");
+            // Validate score
+            if (score < 0 || score > 100) {
+                System.out.println("Invalid Score. Please enter a value between 0 and 100.");
+                return;
+            }
+
+            System.out.print("Enter Attempts (0-10): ");
             int attempts = Integer.parseInt(scanner.nextLine());
+
+            // Validate attempts
+            if (attempts < 0 || attempts > 10) {
+                System.out.println("Invalid Attempts. Please enter a value between 0 and 10.");
+                return;
+            }
 
             Progress progress = new Progress(userId, moduleId, progressStatus, completionDate, score, attempts);
             progressDAO.createProgress(progress);
@@ -114,17 +131,35 @@ public class Main {
             System.out.print("Enter new Module ID: ");
             int moduleId = Integer.parseInt(scanner.nextLine());
 
-            System.out.print("Enter new Progress Status: ");
-            String progressStatus = scanner.nextLine();
+            System.out.print("Enter new Progress Status (starter, beginner, excellent): ");
+            String progressStatus = scanner.nextLine().toLowerCase();
+
+            // Validate progress status
+            if (!progressStatus.equals("starter") && !progressStatus.equals("beginner") && !progressStatus.equals("excellent")) {
+                System.out.println("Invalid Progress Status. Please choose between starter, beginner, or excellent.");
+                return;
+            }
 
             System.out.print("Enter new Completion Date (YYYY-MM-DD): ");
             String completionDate = scanner.nextLine();
 
-            System.out.print("Enter new Score: ");
+            System.out.print("Enter new Score (0-100): ");
             int score = Integer.parseInt(scanner.nextLine());
 
-            System.out.print("Enter new Attempts: ");
+            // Validate score
+            if (score < 0 || score > 100) {
+                System.out.println("Invalid Score. Please enter a value between 0 and 100.");
+                return;
+            }
+
+            System.out.print("Enter new Attempts (0-10): ");
             int attempts = Integer.parseInt(scanner.nextLine());
+
+            // Validate attempts
+            if (attempts < 0 || attempts > 10) {
+                System.out.println("Invalid Attempts. Please enter a value between 0 and 10.");
+                return;
+            }
 
             Progress progress = new Progress(progressId, userId, moduleId, progressStatus, completionDate, score, attempts);
             progressDAO.updateProgress(progress);
